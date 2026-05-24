@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>You're invited</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f6f7fb;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #111827;
+      }
+
+      .wrap {
+        width: 100%;
+        padding: 24px 12px;
+      }
+
+      .card {
+        max-width: 640px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        padding: 28px 24px;
+        color: #fff;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 20px;
+        line-height: 1.3;
+      }
+
+      .content {
+        padding: 24px;
+      }
+
+      .p {
+        margin: 0 0 14px 0;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #111827;
+      }
+
+      .muted {
+        color: #6b7280;
+        font-size: 13px;
+      }
+
+      .box {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin: 14px 0 18px;
+      }
+
+      .row {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .label {
+        color: #6b7280;
+      }
+
+      .btn {
+        display: inline-block;
+        background: #2563eb;
+        color: #fff !important;
+        text-decoration: none;
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .btn-secondary {
+        background: #111827;
+      }
+
+      .hr {
+        height: 1px;
+        background: #e5e7eb;
+        margin: 18px 0;
+      }
+
+      .footer {
+        padding: 18px 24px;
+        background: #f9fafb;
+        border-top: 1px solid #e5e7eb;
+      }
+
+      a {
+        color: #2563eb;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <div class="header">
+          <h1>You've been invited to {{APP_NAME}}</h1>
+        </div>
+
+        <div class="content">
+          <p class="p">Hi {{FIRST_NAME}},</p>
+          <p class="p">
+            Welcome to <strong>{{APP_NAME}}</strong>. An account has been created for you.
+          </p>
+
+          <div class="box">
+            <p class="row"><span class="label">Email:</span> <strong>{{USER_EMAIL}}</strong></p>
+            <p class="row">
+              <span class="label">Temporary password:</span> <strong>{{TEMP_PASSWORD}}</strong>
+            </p>
+          </div>
+
+          <p class="p"><strong>Important:</strong> Please change your password immediately.</p>
+
+          <p class="p" style="margin-bottom: 18px;">
+            <a
+              href="{{LOGIN_URL}}"
+              target="_blank"
+              rel="noopener"
+              style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;padding:12px 16px;border-radius:10px;font-weight:700;font-size:14px;"
+              >Log in</a
+            >
+            &nbsp;&nbsp;
+            <a
+              href="{{CHANGE_PASSWORD_URL}}"
+              target="_blank"
+              rel="noopener"
+              style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:12px 16px;border-radius:10px;font-weight:700;font-size:14px;"
+              >Change password</a
+            >
+          </p>
+
+          <div class="hr"></div>
+
+          <p class="p muted" style="margin-bottom: 8px;">If the buttons don't work, use these links:</p>
+          <p class="p muted" style="margin-bottom: 6px;">
+            Login: <a href="{{LOGIN_URL}}">{{LOGIN_URL}}</a>
+          </p>
+          <p class="p muted">Change password: <a href="{{CHANGE_PASSWORD_URL}}">{{CHANGE_PASSWORD_URL}}</a></p>
+
+          <div class="hr"></div>
+
+          <p class="p muted" style="margin: 0;">If you weren't expecting this invitation, you can ignore this email.</p>
+        </div>
+
+        <div class="footer">
+          <p class="p muted" style="margin: 0;">
+            &copy; {{YEAR}} {{APP_NAME}} &middot; This is an automated message, please do not reply.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

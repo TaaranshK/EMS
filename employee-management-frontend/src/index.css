@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #7c3aed;
+  --purple-600: #7c3aed;
+  --purple-700: #6d28d9;
+  --lavender-50: #faf5ff;
+  --lavender-100: #f3e8ff;
+  --lavender-200: #e9d5ff;
+  --lavender-300: #d8b4fe;
+  --ink: #1a1a2e;
+  --ink-soft: #2d2d3a;
+  --muted: #6b7280;
+  --surface: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--lavender-50);
+}
