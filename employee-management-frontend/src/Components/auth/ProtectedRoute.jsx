@@ -1,9 +1,18 @@
 import { Navigate } from "react-router-dom";
-import { clearAuthStorage, getStoredToken } from "../../utils/authStorage";
+import {
+  clearAuthStorage,
+  getStoredRole,
+  getStoredToken,
+} from "../../utils/authStorage";
 
-export default function ProtectedRoute({ children, allowedRoles, role: requiredRole }) {
+export default function ProtectedRoute({
+  children,
+  allowedRoles,
+  role: requiredRole,
+  redirectTo = "/login",
+}) {
   const token = getStoredToken();
-  const storedRole = localStorage.getItem("role");
+  const storedRole = getStoredRole();
 
   if (!token) {
     clearAuthStorage();
@@ -19,7 +28,7 @@ export default function ProtectedRoute({ children, allowedRoles, role: requiredR
 
   if (rolesToAllow.length > 0) {
     if (!storedRole || !rolesToAllow.includes(storedRole)) {
-      return <Navigate to="/login" replace />;
+      return <Navigate to={redirectTo} replace />;
     }
   }
 

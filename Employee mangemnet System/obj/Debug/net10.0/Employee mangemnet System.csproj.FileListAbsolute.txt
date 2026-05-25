@@ -144,3 +144,4 @@ C:\Users\taara\OneDrive\DATA\Desktop\Learning ASPNET core\Employee Management Sy
 C:\Users\taara\OneDrive\DATA\Desktop\Learning ASPNET core\Employee Management System\Employee mangemnet System\Employee mangemnet System\obj\Debug\net10.0\Employee mangemnet System.genruntimeconfig.cache
 C:\Users\taara\OneDrive\DATA\Desktop\Learning ASPNET core\Employee Management System\Employee mangemnet System\Employee mangemnet System\obj\Debug\net10.0\ref\Employee mangemnet System.dll
 C:\Users\taara\OneDrive\DATA\Desktop\Learning ASPNET core\Employee Management System\Employee mangemnet System\Employee mangemnet System\bin\Debug\net10.0\EmailTemplates\InviteEmployee.html
+C:\Users\taara\OneDrive\DATA\Desktop\Learning ASPNET core\Employee Management System\Employee mangemnet System\Employee mangemnet System\obj\Debug\net10.0\Employee mangemnet System.sourcelink.json
