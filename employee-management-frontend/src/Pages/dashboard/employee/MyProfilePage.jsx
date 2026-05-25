@@ -5,6 +5,7 @@ import { API_BASE_URL } from "../../../config/api";
 import { getStoredToken } from "../../../utils/authStorage";
 import Card from "../../../Components/dashboard/Card";
 import EmployeeCard from "../../../Components/dashboard/EmployeeCard";
+import PageSeo from "../../../Components/seo/PageSeo";
 
 export default function MyProfilePage() {
   const { employee, setEmployee } = useOutletContext();
@@ -60,6 +61,10 @@ export default function MyProfilePage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+      <PageSeo
+        title="My Profile"
+        description="Review and update your personal employee profile details in the Employee Management System."
+      />
       <h1 style={{ fontSize: "38px", fontWeight: "700", color: "#1a1a2e", marginBottom: "0.25rem" }}>My Profile</h1>
       <p style={{ color: "#888", fontSize: "14px", marginBottom: "2rem" }}>Keep your personal details polished and current.</p>
 

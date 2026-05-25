@@ -3,6 +3,7 @@ import {
   EmployeeOverviewGrid,
   EmployeeStatsRibbon,
 } from "../../../Components/dashboard/EmployeeDashboardSections";
+import PageSeo from "../../../Components/seo/PageSeo";
 
 export default function EmployeeDashboardPage() {
   const { employee, taskSummary, tasks } = useOutletContext();
@@ -12,6 +13,10 @@ export default function EmployeeDashboardPage() {
 
   return (
     <div>
+      <PageSeo
+        title="Employee Dashboard"
+        description="Access your onboarding progress, profile summary, tasks, and daily work overview."
+      />
       <h1
         style={{
           fontSize: "38px",

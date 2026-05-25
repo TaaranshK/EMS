@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import useLoginForm from "../../hooks/useLoginForm";
 import InputField from "../../Components/auth/InputField";
 import ImagePanel from "../../Components/auth/ImagePanel";
+import PageSeo from "../../Components/seo/PageSeo";
 
 export default function LoginPage() {
   const { formData, showPassword, setShowPassword, isLoading, error, role, setRole, handleChange, handleSubmit } = useLoginForm();
@@ -10,9 +11,11 @@ export default function LoginPage() {
 
   return (
     <>
+      <PageSeo
+        title="Login"
+        description="Securely sign in to the Employee Management System to access your employee or admin workspace."
+      />
       <Helmet>
-        <title>Login | Employee Management System</title>
-        <meta name="description" content="Login to Employee Management System" />
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap"
           rel="stylesheet"

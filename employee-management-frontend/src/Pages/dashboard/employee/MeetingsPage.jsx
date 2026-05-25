@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Card from "../../../Components/dashboard/Card";
+import PageSeo from "../../../Components/seo/PageSeo";
 
 export default function MeetingsPage() {
   return (
@@ -8,6 +9,10 @@ export default function MeetingsPage() {
       animate={{ opacity: 1, y: 0 }}
       style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center" }}
     >
+      <PageSeo
+        title="My Meetings"
+        description="Review meeting information and upcoming employee meeting visibility inside your workspace."
+      />
       <Card style={{ width: "min(720px, 100%)", textAlign: "center" }}>
         <div
           style={{

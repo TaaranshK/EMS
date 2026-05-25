@@ -15,6 +15,7 @@ import {
   getRecentMeetings,
   scheduleMeeting,
 } from "../../services/Dashboard";
+import PageSeo from "../../Components/seo/PageSeo";
 
 const isValidUrl = (value) => {
   try {
@@ -155,6 +156,10 @@ export default function MeetingsPage() {
 
   return (
     <div style={{ padding: "18px 22px" }}>
+      <PageSeo
+        title="Meetings"
+        description="Schedule employee meetings, review upcoming sessions, and monitor recent meeting activity from the admin workspace."
+      />
       {/* Top bar */}
       <div style={{ display: "flex", gap: "16px", alignItems: "center", marginBottom: "16px" }}>
         <div style={{ flex: 1 }}>

@@ -1,18 +1,12 @@
 ﻿import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { getDashboardStats, getEmployees } from "../../services/Dashboard";
-import NavBar from "../../Components/dashboard/NavBar";
 import StatsBar from "../../Components/dashboard/statsBar";
 import EmployeeCard from "../../Components/dashboard/EmployeeCard";
 import OnboardingPanel from "../../Components/dashboard/OnboardingPanel";
 import InviteModal from "../../Components/dashboard/InviteModal";
-import EmployeesPage from "./EmployeesPage";
-import HiringPage from "./HiringPage";
-import PayrollPage from "./PayrollPage";
-import ComingSoonPage from "./ComingSoonPage";
-import MeetingsPage from "./MeetingsPage";
-import { clearAuthStorage, getStoredToken } from "../../utils/authStorage";
+import PageSeo from "../../Components/seo/PageSeo";
+import { getStoredToken } from "../../utils/authStorage";
 import {
   Play, Pause, Timer,
   CaretLeft, CaretRight,
@@ -21,13 +15,11 @@ import {
 } from "@phosphor-icons/react";
 
 export default function SuperAdminDashboard() {
-  const navigate = useNavigate();
   const [stats,           setStats]           = useState(null);
   const [employees,       setEmployees]       = useState([]);
   const [loading,         setLoading]         = useState(true);
   const [error,           setError]           = useState("");
   const [showInviteModal, setShowInviteModal] = useState(false);
-  const [activePage, setActivePage] = useState("Dashboard");
 
   const loadData = async (showLoading = true) => {
     if (showLoading) {
@@ -55,39 +47,12 @@ export default function SuperAdminDashboard() {
   };
 
   useEffect(() => {
-    const loadInitialData = async () => {
-      setError("");
-      try {
-        const token = getStoredToken();
-        if (!token) {
-          setError("No auth token found. Please login again.");
-          return;
-        }
-        const [statsData, empData] = await Promise.all([
-          getDashboardStats(),
-          getEmployees({ page: 1, pageSize: 10 })
-        ]);
-        setStats(statsData);
-        setEmployees(empData.data || []);
-      } catch (err) {
-        console.error(err);
-        setError(err instanceof Error ? err.message : "Failed to load dashboard data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    void loadInitialData();
+    void loadData();
   }, []);
-
-  const handleLogout = () => {
-    clearAuthStorage();
-    navigate("/login");
-  };
 
   if (loading) return (
     <div style={{
-      height: "100vh", display: "flex",
+      minHeight: "60vh", display: "flex",
       alignItems: "center", justifyContent: "center",
       background: "var(--lavender-50)", fontSize: "14px", color: "var(--muted)"
     }}>
@@ -95,48 +60,32 @@ export default function SuperAdminDashboard() {
     </div>
   );
 
-  const renderPage = () => {
-    switch (activePage) {
-      case "Employees": return <EmployeesPage />;
-      case "Payroll": return <PayrollPage />;
-      case "Hiring": return <HiringPage onInvite={() => setShowInviteModal(true)} />;
-      case "Devices": return <ComingSoonPage pageName="Devices" />;
-      case "Meetings": return <MeetingsPage />;
-      default:
-        return (
-          <DashboardContent
-            stats={stats}
-            employees={employees}
-            error={error}
-            onInvite={() => setShowInviteModal(true)}
-          />
-        );
-    }
-  };
-
   return (
-    <div style={{ minHeight: "100vh", background: "#eeecf3", fontFamily: "'Georgia', serif" }}>
-      <NavBar
-        active={activePage}
-        onNavigate={setActivePage}
-        onLogout={handleLogout}
+    <>
+      <PageSeo
+        title="Admin Dashboard"
+        description="View employee stats, onboarding progress, and recent workforce activity from the admin dashboard."
       />
-      {renderPage()}
+      <DashboardContent
+        stats={stats}
+        employees={employees}
+        error={error}
+        onInvite={() => setShowInviteModal(true)}
+      />
 
-      {/* Invite Modal */}
       {showInviteModal && (
         <InviteModal
           onClose={() => setShowInviteModal(false)}
           onSuccess={loadData}
         />
       )}
-    </div>
+    </>
   );
 }
 
 function DashboardContent({ stats, employees, error, onInvite }) {
   return (
-    <div style={{ padding: "0 28px 32px" }}>
+    <div>
       <motion.h1
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -175,7 +124,7 @@ function DashboardContent({ stats, employees, error, onInvite }) {
           <TimeTrackerCard />
           <EmployeeTable employees={employees} onInvite={onInvite} />
         </div>
-        <OnboardingPanel stats={stats} />
+        <OnboardingPanel stats={stats} employees={employees} />
       </div>
     </div>
   );

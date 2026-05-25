@@ -31,17 +31,33 @@ const formatTaskDate = (date) =>
     minute: "2-digit",
   });
 
-export default function OnboardingPanel({ stats }) {
-  const total = TASK_DEFS.length;
+export default function OnboardingPanel({ stats, employees = [] }) {
+  const onboardingCount =
+    (stats?.onboardingComplete ?? 0) + (stats?.pendingOnboarding ?? 0);
+  const total = Math.max(onboardingCount, TASK_DEFS.length);
   const completed = Math.max(0, Math.min(total, stats?.onboardingComplete ?? 0));
   const percent = total ? Math.round((completed / total) * 100) : 0;
 
-  const tasks = TASK_DEFS.map((task, i) => {
-    const date = new Date(TASK_BASE_DATE);
-    date.setDate(TASK_BASE_DATE.getDate() + i);
-    date.setHours(9 + (i % 4) * 2, 15 + (i % 3) * 10, 0, 0);
-    return { ...task, sub: formatTaskDate(date) };
-  });
+  const recentEmployees = stats?.recentEmployees?.length ? stats.recentEmployees : employees;
+  const tasks =
+    recentEmployees.length > 0
+      ? recentEmployees.slice(0, TASK_DEFS.length).map((employee, index) => {
+          const template = TASK_DEFS[index % TASK_DEFS.length];
+          const createdAt = employee?.createdAt ? new Date(employee.createdAt) : null;
+
+          return {
+            ...template,
+            title: `${employee.firstName} ${employee.lastName}`,
+            sub: employee.department || formatTaskDate(createdAt ?? TASK_BASE_DATE),
+            isDone: Boolean(employee.isPasswordChanged),
+          };
+        })
+      : TASK_DEFS.map((task, index) => {
+          const date = new Date(TASK_BASE_DATE);
+          date.setDate(TASK_BASE_DATE.getDate() + index);
+          date.setHours(9 + (index % 4) * 2, 15 + (index % 3) * 10, 0, 0);
+          return { ...task, sub: formatTaskDate(date), isDone: index < completed };
+        });
 
   return (
     <motion.div
@@ -106,7 +122,7 @@ export default function OnboardingPanel({ stats }) {
 
         {tasks.map((task, i) => {
           const Icon = task.icon;
-          const isDone = i < completed;
+          const isDone = task.isDone ?? i < completed;
 
           return (
             <div

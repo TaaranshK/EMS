@@ -6,6 +6,7 @@ import {
   getOnboardingTasksByEmployee,
 } from "../../services/Dashboard";
 import { Users, UserPlus, ClipboardText, UploadSimple, X } from "@phosphor-icons/react";
+import PageSeo from "../../Components/seo/PageSeo";
 
 export default function HiringPage({ onInvite }) {
   const [employees, setEmployees] = useState([]);
@@ -125,6 +126,10 @@ export default function HiringPage({ onInvite }) {
 
   return (
     <div style={{ padding: "24px 28px" }}>
+      <PageSeo
+        title="Hiring"
+        description="Invite new employees, upload bulk onboarding lists, and track onboarding progress from the hiring dashboard."
+      />
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px" }}>
         <div>

@@ -1,7 +1,7 @@
-import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import InputField from "../../Components/auth/InputField";
 import useChangePassword from "../../hooks/useChangePassword";
+import PageSeo from "../../Components/seo/PageSeo";
 
 export default function ChangePasswordPage() {
   const {
@@ -18,10 +18,10 @@ export default function ChangePasswordPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Change Password | Employee Management System</title>
-        <meta name="description" content="Change your temporary password to continue" />
-      </Helmet>
+      <PageSeo
+        title="Change Password"
+        description="Update your temporary password to activate secure access to the Employee Management System."
+      />
 
       <main
         style={{

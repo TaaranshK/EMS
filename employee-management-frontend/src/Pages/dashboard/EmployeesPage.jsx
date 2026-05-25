@@ -9,6 +9,7 @@ import {
   updateEmployee
 } from "../../services/Dashboard";
 import InviteModal from "../../Components/dashboard/InviteModal";
+import PageSeo from "../../Components/seo/PageSeo";
 
 export default function EmployeesPage() {
   const [employees,   setEmployees]   = useState([]);
@@ -121,6 +122,10 @@ export default function EmployeesPage() {
 
   return (
     <div style={{ padding: "24px 28px" }}>
+      <PageSeo
+        title="Employees"
+        description="Manage employee records, search staff members, update details, and send invites from the employees dashboard."
+      />
 
       {/* Header */}
       <div style={{

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { getEmployees } from "../../services/Dashboard";
 import { Money, TrendUp, Users, CalendarBlank } from "@phosphor-icons/react";
+import PageSeo from "../../Components/seo/PageSeo";
 
 export default function PayrollPage() {
   const [employees, setEmployees] = useState([]);
@@ -57,6 +58,10 @@ export default function PayrollPage() {
 
   return (
     <div style={{ padding: "24px 28px" }}>
+      <PageSeo
+        title="Payroll"
+        description="Review payroll totals, salary averages, upcoming pay cycles, and employee compensation details."
+      />
       {/* Header */}
       <div style={{ marginBottom: "24px" }}>
         <h1
@@ -346,4 +351,3 @@ export default function PayrollPage() {
     </div>
   );
 }
-

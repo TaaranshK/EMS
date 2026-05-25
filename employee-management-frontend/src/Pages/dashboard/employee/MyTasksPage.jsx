@@ -4,6 +4,7 @@ import { useOutletContext } from "react-router-dom";
 import { API_BASE_URL } from "../../../config/api";
 import { getStoredToken } from "../../../utils/authStorage";
 import Card from "../../../Components/dashboard/Card";
+import PageSeo from "../../../Components/seo/PageSeo";
 
 export default function MyTasksPage() {
   const { tasks, setTasks, taskSummary, setTaskSummary } = useOutletContext();
@@ -67,6 +68,10 @@ export default function MyTasksPage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+      <PageSeo
+        title="My Tasks"
+        description="Track and complete your onboarding tasks, progress, and assigned employee actions."
+      />
       <h1 style={{ fontSize: "2rem", fontWeight: "700", color: "#1a1a2e", marginBottom: "0.25rem" }}>My Onboarding Tasks</h1>
       <p style={{ color: "#888", fontSize: "14px", marginBottom: "2rem" }}>Complete all tasks to finish your onboarding journey.</p>
 

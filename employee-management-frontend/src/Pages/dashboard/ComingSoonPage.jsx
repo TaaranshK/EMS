@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { HourglassMedium } from "@phosphor-icons/react";
+import PageSeo from "../../Components/seo/PageSeo";
 
 export default function ComingSoonPage({ pageName }) {
   return (
@@ -13,6 +14,10 @@ export default function ComingSoonPage({ pageName }) {
         gap: "16px",
       }}
     >
+      <PageSeo
+        title={`${pageName} Coming Soon`}
+        description={`${pageName} features are under development in the Employee Management System.`}
+      />
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -47,4 +52,3 @@ export default function ComingSoonPage({ pageName }) {
     </div>
   );
 }
-
