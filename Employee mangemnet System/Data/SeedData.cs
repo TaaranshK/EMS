@@ -31,6 +31,30 @@ namespace Employee_mangemnet_System.Data
                 dbContext.SaveChanges();
             }
 
+            // Seed Taaransh Kapoor as SuperAdmin
+            var taaranshEmail = "taaransh.kapoor@gmail.com";
+            var taaranshPassword = "Guddiguddi13@";
+            var existingTaaransh = dbContext.SuperAdmins.FirstOrDefault(s => s.Email == taaranshEmail);
+            if (existingTaaransh == null)
+            {
+                var superAdminTaaransh = new SuperAdmin
+                {
+                    FullName = "Taaransh Kapoor",
+                    Email = taaranshEmail,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(taaranshPassword),
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                dbContext.SuperAdmins.Add(superAdminTaaransh);
+                dbContext.SaveChanges();
+            }
+            else if (isDevelopment && !BCrypt.Net.BCrypt.Verify(taaranshPassword, existingTaaransh.PasswordHash))
+            {
+                // In development, keep the known password working to avoid lock-outs after reseeds/tests
+                existingTaaransh.PasswordHash = BCrypt.Net.BCrypt.HashPassword(taaranshPassword);
+                dbContext.SaveChanges();
+            }
+
             // Seed Employees with Indian Names
             if (!dbContext.Employees.Any())
             {

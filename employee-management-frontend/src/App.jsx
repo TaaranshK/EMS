@@ -13,10 +13,15 @@ import AdminMeetingsPage from "./Pages/dashboard/MeetingsPage";
 import MyProfilePage from "./Pages/dashboard/employee/MyProfilePage";
 import MyTasksPage from "./Pages/dashboard/employee/MyTasksPage";
 import EmployeeMeetingsPage from "./Pages/dashboard/employee/MeetingsPage";
+import MessagesPage from "./Pages/dashboard/MessagePage";
 import { getStoredRole } from "./utils/authStorage";
 
 function DashboardMeetingsPage() {
   return getStoredRole() === "Employee" ? <EmployeeMeetingsPage /> : <AdminMeetingsPage />;
+}
+
+function DashboardMessagesPage() {
+  return <MessagesPage />;
 }
 
 export default function App() {
@@ -89,6 +94,14 @@ export default function App() {
               element={
                 <ProtectedRoute role="Employee" redirectTo="/dashboard">
                   <MyTasksPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="messages"
+              element={
+                <ProtectedRoute allowedRoles={["SuperAdmin", "Employee"]} redirectTo="/dashboard">
+                  <DashboardMessagesPage />
                 </ProtectedRoute>
               }
             />
